@@ -1,0 +1,24 @@
+# Tableau des contrôles qualité – BAAC 2024
+
+| N° | Contrôle | Résultat | Statut | Commentaire / action |
+|---|---|---|---|---|
+| 1 | Num_Acc unique dans CARACTERISTIQUES | 0 doublon(s) sur 54,402 lignes | OK | Clé primaire de la table accident |
+| 2 | Num_Acc unique dans LIEUX | 15,846 ligne(s) en double ; 15,645 accident(s) décrits sur plusieurs voies | À signaler | Accident au croisement de plusieurs voies : on garde la 1re ligne (lieu principal) pour joindre en 1-1 |
+| 3 | Correspondance CARACTERISTIQUES ↔ LIEUX | 0 accident(s) sans lieu, 0 lieu(x) sans accident | OK |  |
+| 4 | Valeurs -1 (non renseigné), toutes tables | 549,583 cellules ; détail dans reports/valeurs_non_renseignees.csv | OK | Transformées en NaN à l'étape 3 ; poids indiqué dans les limites de la story |
+| 5 | Années de naissance aberrantes (avant 1900, après 2024, ou âge > 105 ans) | 3 aberrante(s), 2,579 absente(s) sur 125,187 usagers | À signaler | Âge mis à NaN pour ces usagers |
+| 6 | Coordonnées absentes ou nulles (0,0) | 0 absentes, 0 nulles | OK | Gardées dans les comptages mais exclues de la carte |
+| 7 | Coordonnées hors de France métropolitaine (départements métropolitains) | 3 accident(s) | À signaler | Signalées ; exclues de la carte |
+| 8 | id_vehicule sans aucun usager | 24 véhicule(s) | OK | Conforme à la documentation ONISR (usagers en fuite) ; comptés dans nb_vehicules |
+| 9 | Usagers rattachés à un véhicule absent de VEHICULES | 0 usager(s) | OK |  |
+| 10 | (Num_Acc, id_vehicule) unique dans VEHICULES | 0 doublon(s) | OK |  |
+| 11 | id_usager unique dans USAGERS | 0 doublon(s) | OK |  |
+| 12 | Vitesse maximale autorisée hors des valeurs réglementaires | 271 lieu(x) (ex. 0, 500…) | À signaler | Erreurs de saisie probables : mises à NaN |
+| 13 | Gravité non renseignée (grav) | 0 usager(s) | OK | Si présents : usagers en fuite le plus souvent ; ni tués ni blessés dans les comptages |
+| 14 | Accidents : table accidents = Num_Acc distincts de CARACTERISTIQUES | 54,402 / 54,402 | OK |  |
+| 15 | Accidents ayant au moins un usager : accidents = usagers_enrichis (distincts) | 54,402 / 54,402 | OK |  |
+| 16 | Usagers : somme nb_usagers = lignes usagers_enrichis | 125,187 / 125,187 | OK |  |
+| 17 | Tués : accidents = usagers_enrichis | 3,432 / 3,432 | OK |  |
+| 18 | Hospitalisés : accidents = usagers_enrichis | 19,126 / 19,126 | OK |  |
+| 19 | Blessés légers : accidents = usagers_enrichis | 49,709 / 49,709 | OK |  |
+| 20 | Véhicules : somme nb_vehicules = lignes VEHICULES | 92,678 / 92,678 | OK |  |

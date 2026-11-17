@@ -1,0 +1,21 @@
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Systèmes
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office / fichiers temporaires
+~$*
+
+# Tableau : fichiers temporaires et sauvegardes (on garde uniquement le .twbx)
+*.twb
+*.tde
+*.hyper
+*.twbr
+Bibliothèque/
